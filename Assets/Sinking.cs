@@ -18,6 +18,7 @@ public class Sinking : MonoState
         Vector3 fallStep = new Vector3(0, -1, 0) * Time.deltaTime * fallSpeed;
         Vector3 moveStep = new Vector3(n.x, 0, 0) * Time.deltaTime * horizontalSpeed;
         Control.Mover.Move(moveStep + fallStep);
+        followCam.position += fallStep;
         if(Control.DashPressed){
             Dashing.GotoState();
         }

@@ -17,8 +17,10 @@ public class FreeFall : MonoState
     public void LateUpdate(){
         Vector3 n = Control.LatestDirection;
         Vector3 fallStep = new Vector3(0, -1, 0) * Time.deltaTime * fallSpeed;
+        
         Control.Mover.Move(fallStep);
-
+        followCam.position += fallStep;
+        
         if(transform.position.y < water.transform.position.y){
             cameraAnimator.SafePlay("start_sinking",0,0);
             Sink.GotoState();

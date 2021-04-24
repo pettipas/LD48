@@ -5,15 +5,18 @@ using UnityEngine;
 public class InputControl : MonoBehaviour
 {
     public MonoState defaultState;
+    public MonoState gameOver;
     public GameObject body;
     public Vector3 LatestDirection;
     public Vector3 LastGoodRawDirection;
     public Vector3 LastGoodDirection;
     public CharacterController Mover;
-
+    public Transform oceanFloor;
+    public Transform cameraTransform;
     public bool DashPressed;
 
     public void Awake () {
+        gameOver = GetComponent<GameOver>();
         defaultState = GetComponent<FreeFall>();
         defaultState.GotoState();
         Mover = GetComponent<CharacterController>();
@@ -21,6 +24,13 @@ public class InputControl : MonoBehaviour
     }
 
     public void Update(){
+
+        if(transform.position.y < oceanFloor.position.y){
+            cameraTransform.SetParent(null);
+            gameOver.GotoState();
+            this.enabled = false;
+            return;
+        }
 
         float x = Input.GetAxis("Horizontal");
         float xR = Input.GetAxisRaw("Horizontal");
