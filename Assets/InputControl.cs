@@ -14,7 +14,7 @@ public class InputControl : MonoBehaviour
     public bool DashPressed;
 
     public void Awake () {
-        defaultState = GetComponent<Sinking>();
+        defaultState = GetComponent<FreeFall>();
         defaultState.GotoState();
         Mover = GetComponent<CharacterController>();
         body.transform.forward = Vector3.left;
