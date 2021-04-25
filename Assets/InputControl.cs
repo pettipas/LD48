@@ -13,6 +13,7 @@ public class InputControl : MonoBehaviour
     public Transform oceanFloor;
     public Transform cameraTransform;
     public bool DashPressed;
+    public bool DownPressed;
 
     public void Awake () {
         gameOver = GetComponent<GameOver>();
@@ -24,7 +25,7 @@ public class InputControl : MonoBehaviour
 
     public void Update(){
 
-        if(transform.position.y < oceanFloor.position.y){
+        if(transform.position.y < oceanFloor.position.y) {
             cameraTransform.SetParent(null);
             gameOver.GotoState();
             this.enabled = false;
@@ -42,11 +43,16 @@ public class InputControl : MonoBehaviour
 
         float x = Input.GetAxis("Horizontal");
         float xR = Input.GetAxisRaw("Horizontal");
-
+        
         if(y < 0) {
+            timey+=Time.deltaTime;
             LatestDirection = new Vector3(0, y, 0);
             body.transform.eulerAngles = new Vector3(90,90,0);
+            DownPressed = true;
             return;
+        }else {
+            timey = 0;
+            DownPressed = false;
         }
 
         LatestDirection = new Vector3(x, 0, 0);

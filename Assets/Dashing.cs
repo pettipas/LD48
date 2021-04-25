@@ -12,9 +12,8 @@ public class Dashing : MonoState
     public Vector3 start;
     public Vector3 end;
     public float progress = 0;
-
     public float distanceConsumed;
-
+    public float fallSpeed;
     new void Awake(){
         base.Awake();
         Sink = GetComponent<Sinking>();
