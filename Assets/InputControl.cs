@@ -8,7 +8,6 @@ public class InputControl : MonoBehaviour
     public MonoState gameOver;
     public GameObject body;
     public Vector3 LatestDirection;
-    public Vector3 LastGoodRawDirection;
     public Vector3 LastGoodDirection;
     public CharacterController Mover;
     public Transform oceanFloor;
@@ -32,8 +31,24 @@ public class InputControl : MonoBehaviour
             return;
         }
 
+        if(Input.GetKeyDown(KeyCode.Space)){
+            DashPressed = true;
+        }else{
+            DashPressed = false;
+        }
+
+        float y = Input.GetAxis("Vertical");
+        float yR = Input.GetAxisRaw("Vertical");
+
         float x = Input.GetAxis("Horizontal");
         float xR = Input.GetAxisRaw("Horizontal");
+
+        if(y < 0) {
+            LatestDirection = new Vector3(0, y, 0);
+            body.transform.eulerAngles = new Vector3(90,90,0);
+            return;
+        }
+
         LatestDirection = new Vector3(x, 0, 0);
 
         if(x > 0 || x < 0){
@@ -41,14 +56,7 @@ public class InputControl : MonoBehaviour
         }
 
         if(xR > 0 || xR < 0){
-            LastGoodRawDirection = new Vector3(xR, 0, 0);
-            body.transform.forward = LastGoodRawDirection;
-        }
-
-        if(Input.GetKeyDown(KeyCode.Space)){
-            DashPressed = true;
-        }else{
-            DashPressed = false;
+            body.transform.eulerAngles = new Vector3(0,90*xR,0);
         }
     }
 }
