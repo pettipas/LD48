@@ -10,22 +10,28 @@ public class InputControl : MonoBehaviour
     public Vector3 LatestDirection;
     public Vector3 LastGoodDirection;
     public CharacterController Mover;
-    public Transform oceanFloor;
+    public OceanFloor oceanFloor;
     public Transform cameraTransform;
     public bool DashPressed;
     public bool DownPressed;
 
+    
     public void Awake () {
         gameOver = GetComponent<GameOver>();
+        oceanFloor = GameObject.FindObjectOfType<OceanFloor>();
         defaultState = GetComponent<FreeFall>();
         defaultState.GotoState();
         Mover = GetComponent<CharacterController>();
         body.transform.forward = Vector3.left;
     }
 
+    public void Start(){
+
+    }
+
     public void Update(){
 
-        if(transform.position.y < oceanFloor.position.y) {
+        if(transform.position.y < oceanFloor.camDepth.position.y) {
             cameraTransform.SetParent(null);
             gameOver.GotoState();
             this.enabled = false;
@@ -49,6 +55,8 @@ public class InputControl : MonoBehaviour
             body.transform.eulerAngles = new Vector3(90,90,0);
             DownPressed = true;
             return;
+        }else {
+            DownPressed = false;
         }
 
         LatestDirection = new Vector3(x, 0, 0);

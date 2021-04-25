@@ -14,6 +14,9 @@ public class Dashing : MonoState
     public float progress = 0;
     public float distanceConsumed;
     public float fallSpeed;
+
+    public Animator fish;
+
     new void Awake(){
         base.Awake();
         Sink = GetComponent<Sinking>();
@@ -25,6 +28,7 @@ public class Dashing : MonoState
         end = start + Direction * distance;
         progress = 0;
         distanceConsumed = 0;
+        fish.SafePlay("attack", 0, 0);
     }
 
     // Update is called once per frame
@@ -33,7 +37,8 @@ public class Dashing : MonoState
         Control.Mover.Move(Direction * speed * Time.smoothDeltaTime);
         distanceConsumed += speed * Time.smoothDeltaTime;
         progress = distanceConsumed / distance;
-        if(progress >= 1){
+        if(progress >= 1 && !fish.AtEndOfAnimation()){
+            fish.SafePlay("closemouth", 0, 0);
             Sink.GotoState();
         }
     }
