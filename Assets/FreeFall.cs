@@ -11,9 +11,14 @@ public class FreeFall : MonoState
     public AudioReverbZone zone;
     public AudioSource spash;
     public AudioSource breeze;
+    public AudioSource startNoise;
     new void Awake(){
         base.Awake();
         Sink = GetComponent<Sinking>();
+    }
+
+    public void Start(){
+        startNoise.Play();
     }
 
     public void LateUpdate(){

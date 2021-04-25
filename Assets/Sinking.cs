@@ -7,18 +7,43 @@ public class Sinking : MonoState
     public float fallSpeed = 1;
     public float horizontalSpeed = 1;
     public MonoState Dashing;
-
+    public OctoStart octoStart;
+    public OctoPeeks octoPeeks;
+    public LayerMask DeathMask;
+    public Collider[] deaths = new Collider[1];
+    public Death death;
     public Animator fish;
     float speedMult = 1;
+    public Vector3 deathExtents;
     new void Awake(){
         base.Awake();
         Dashing = GetComponent<Dashing>();
+        death = this.GetComponent<Death>();
     }
-
-    public void OnEnable(){
+    public void OnEnable() {
+        deathExtents = Vector3.one/2.5f;
         fish.SafePlay("sinking",0,0);
+        octoStart = GameObject.FindObjectOfType<OctoStart>();
+        octoPeeks = GameObject.FindObjectOfType<OctoPeeks>();
     }
     public void LateUpdate(){
+
+        if (Physics.OverlapBoxNonAlloc(transform.position, deathExtents, deaths, Quaternion.identity, DeathMask) > 0) {
+            if(deaths[0] != null){
+                death.GotoState();
+                return;
+            }
+        }
+
+
+        if(transform.position.y < octoStart.triggerHeight.position.y){
+            octoStart.enabled = true;
+        }
+
+        if(transform.position.y < octoPeeks.triggerHeight.position.y){
+            octoPeeks.enabled = true;
+        }
+
         Vector3 n = Control.LatestDirection;
         
         if(Control.DownPressed) {
