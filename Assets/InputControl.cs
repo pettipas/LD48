@@ -33,7 +33,6 @@ public class InputControl : MonoBehaviour
     public void Update(){
 
         if(transform.position.y < oceanFloor.camDepth.position.y) {
-            cameraTransform.SetParent(null);
             gameOver.GotoState();
             this.enabled = false;
             return;

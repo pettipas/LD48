@@ -36,11 +36,11 @@ public class Sinking : MonoState
         }
 
 
-        if(transform.position.y < octoStart.triggerHeight.position.y){
+        if(octoStart != null && transform.position.y < octoStart.triggerHeight.position.y){
             octoStart.enabled = true;
         }
 
-        if(transform.position.y < octoPeeks.triggerHeight.position.y){
+        if(octoPeeks != null && transform.position.y < octoPeeks.triggerHeight.position.y){
             octoPeeks.enabled = true;
         }
 
