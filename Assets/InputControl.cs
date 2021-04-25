@@ -15,6 +15,7 @@ public class InputControl : MonoBehaviour
     public bool DashPressed;
     public bool DownPressed;
 
+    public MonoState Dash;
     
     public void Awake () {
         gameOver = GetComponent<GameOver>();
@@ -50,7 +51,7 @@ public class InputControl : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         float xR = Input.GetAxisRaw("Horizontal");
         
-        if(y < 0) {
+        if(y < 0 && !Dash.enabled) {
             LatestDirection = new Vector3(0, y, 0);
             body.transform.eulerAngles = new Vector3(90,90,0);
             DownPressed = true;
@@ -65,7 +66,7 @@ public class InputControl : MonoBehaviour
             LastGoodDirection = new Vector3(x, 0, 0);
         }
 
-        if(xR > 0 || xR < 0){
+        if(xR > 0 || xR < 0 && !Dash.enabled){
             body.transform.eulerAngles = new Vector3(0,90*xR,0);
         }
     }

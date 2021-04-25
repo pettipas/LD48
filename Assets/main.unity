@@ -794,6 +794,7 @@ MonoBehaviour:
   fallSpeed: 2
   horizontalSpeed: 5
   Dashing: {fileID: 0}
+  fish: {fileID: 1637661359}
 --- !u!114 &1712380197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -846,6 +847,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1891826959}
   DashPressed: 0
   DownPressed: 0
+  Dash: {fileID: 1712380197}
 --- !u!114 &1712380199
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -8,12 +8,16 @@ public class Sinking : MonoState
     public float horizontalSpeed = 1;
     public MonoState Dashing;
 
+    public Animator fish;
     float speedMult = 1;
     new void Awake(){
         base.Awake();
         Dashing = GetComponent<Dashing>();
     }
 
+    public void OnEnable(){
+        fish.SafePlay("sinking",0,0);
+    }
     public void LateUpdate(){
         Vector3 n = Control.LatestDirection;
         

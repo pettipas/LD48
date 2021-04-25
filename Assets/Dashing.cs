@@ -37,8 +37,7 @@ public class Dashing : MonoState
         Control.Mover.Move(Direction * speed * Time.smoothDeltaTime);
         distanceConsumed += speed * Time.smoothDeltaTime;
         progress = distanceConsumed / distance;
-        if(progress >= 1 && !fish.AtEndOfAnimation()){
-            fish.SafePlay("closemouth", 0, 0);
+        if(progress >= 1 && fish.AtEndOfAnimation()){
             Sink.GotoState();
         }
     }
