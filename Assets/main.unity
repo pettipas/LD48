@@ -2831,6 +2831,7 @@ MonoBehaviour:
   - {fileID: 2350779940023693698, guid: bb65252e40a775a4ea00b25efd1af448, type: 3}
   - {fileID: 6400098701976462653, guid: 908ce20b11507704b91aa760b35482ac, type: 3}
   - {fileID: 7413284207629287979, guid: ccae1744b0ce0354784a0db7ee307146, type: 3}
+  - {fileID: 1771201723891462420, guid: 1a29559b7fcb38b4e931f4c131d4e8f9, type: 3}
   startPosition: {fileID: 1699797613}
 --- !u!1 &1610685261
 GameObject:
