@@ -45,14 +45,10 @@ public class InputControl : MonoBehaviour
         float xR = Input.GetAxisRaw("Horizontal");
         
         if(y < 0) {
-            timey+=Time.deltaTime;
             LatestDirection = new Vector3(0, y, 0);
             body.transform.eulerAngles = new Vector3(90,90,0);
             DownPressed = true;
             return;
-        }else {
-            timey = 0;
-            DownPressed = false;
         }
 
         LatestDirection = new Vector3(x, 0, 0);
