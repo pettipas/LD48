@@ -17,6 +17,13 @@ public class Dashing : MonoState
 
     public Animator fish;
 
+    public AudioSource eatSound;
+    public LayerMask FishMask;
+    public Collider[] fishes = new Collider[1];
+    public Vector3 extents;
+
+    public AudioSource eaten;
+
     new void Awake(){
         base.Awake();
         Sink = GetComponent<Sinking>();
@@ -29,11 +36,18 @@ public class Dashing : MonoState
         progress = 0;
         distanceConsumed = 0;
         fish.SafePlay("attack", 0, 0);
+        eatSound.Play();
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
+         if (Physics.OverlapBoxNonAlloc(transform.position, extents, fishes, Quaternion.identity, FishMask) > 0) {
+            Fish f = fishes[0].GetComponent<Fish>();
+            Destroy(f.gameObject);
+            eaten.Play();
+        }
+
         Control.Mover.Move(Direction * speed * Time.smoothDeltaTime);
         distanceConsumed += speed * Time.smoothDeltaTime;
         progress = distanceConsumed / distance;

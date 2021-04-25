@@ -8,7 +8,9 @@ public class FreeFall : MonoState
     public MonoState Sink;
     public Transform water;
     public Animator cameraAnimator;
-
+    public AudioReverbZone zone;
+    public AudioSource spash;
+    public AudioSource breeze;
     new void Awake(){
         base.Awake();
         Sink = GetComponent<Sinking>();
@@ -23,6 +25,9 @@ public class FreeFall : MonoState
         
         if(transform.position.y < water.transform.position.y){
             cameraAnimator.SafePlay("start_sinking",0,0);
+            zone.enabled = true;
+            spash.Play();
+            breeze.Stop();
             Sink.GotoState();
         }
     }
