@@ -16,8 +16,11 @@ public class InputControl : MonoBehaviour
     public bool DownPressed;
 
     public MonoState Dash;
+
+    public int fishEaten;
     
     public void Awake () {
+        fishEaten = 0;
         gameOver = GetComponent<GameOver>();
         oceanFloor = GameObject.FindObjectOfType<OceanFloor>();
         defaultState = GetComponent<FreeFall>();

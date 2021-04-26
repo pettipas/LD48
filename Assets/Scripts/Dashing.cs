@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Dashing : MonoState
 {
     public Vector3 Direction;
@@ -24,15 +24,18 @@ public class Dashing : MonoState
     public Vector3 deathExtents;
     public Death death;
     public AudioSource eaten;
+    public Text text;
 
+    public int fishEaten;
     new void Awake(){
         base.Awake();
         Sink = GetComponent<Sinking>();
         death = this.GetComponent<Death>();
+        fishEaten = 0;
     }
 
     public void OnEnable(){
-        extents = Vector3.one;
+        extents = Vector3.one/2.0f;
         deathExtents = Vector3.one/2.5f;
         Direction = Control.body.transform.forward;
         start = transform.position;
@@ -56,6 +59,8 @@ public class Dashing : MonoState
             Fish f = fishes[0].GetComponent<Fish>();
             Destroy(f.gameObject);
             eaten.Play();
+            fishEaten++;
+            text.text = fishEaten.ToString();
         }
 
         Control.Mover.Move(Direction * speed * Time.smoothDeltaTime);
