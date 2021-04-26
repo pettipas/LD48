@@ -15,7 +15,10 @@ public class OctoStart : MonoBehaviour
 
     float countdown;
 
-    public void OnEnable(){
+    public AudioSource sound;
+
+    public void OnEnable() {
+        sound.Play();
         octoAni.enabled = true;
         if(Random.value > 0.5f){
             Direction = Vector3.right;
@@ -32,6 +35,7 @@ public class OctoStart : MonoBehaviour
         }
         
         if(countdown < 2){
+
             return;
         }
         transform.position += Direction * speed * Time.smoothDeltaTime;

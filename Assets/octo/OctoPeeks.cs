@@ -6,7 +6,11 @@ public class OctoPeeks : MonoBehaviour
 {
    public Transform triggerHeight;
    public Animator animator;
-   public void OnEnable(){
+
+   public AudioSource sound;
+
+   public void OnEnable() {
+       sound.Play();
        animator.enabled = true;
    }
 }

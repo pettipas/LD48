@@ -13,8 +13,8 @@ public class WorldCreator : MonoBehaviour
         startPrefab.Duplicate(startPosition);
         startPosition.position-=new Vector3(0,20,0);
 
-        for(int i = 0; i < 16; i++){
-            if(i == 8){
+        for(int i = 0; i < 8; i++){
+            if(i == 3){
                 mysteryPefab.Duplicate(startPosition);
                 startPosition.position-=new Vector3(0,20,0);
             }

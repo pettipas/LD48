@@ -18,7 +18,7 @@ public class FreeFall : MonoState
     }
 
     public void Start(){
-        startNoise.Play();
+       // startNoise.Play();
     }
 
     public void LateUpdate(){
